@@ -1087,7 +1087,7 @@ int LevenshteinDistance(std::string st_1, std::string st_2) {
     return lev_dist[min_size];
 }
     
-double step = 0.05;
+double step = 0.1;
 double acc = 0.01;
 std::vector<std::vector<double>> gen_grid(std::vector<double> l_bound, std::vector<double> u_bound) {
     std::vector<std::vector<double>> grid;
@@ -1145,7 +1145,7 @@ vector<double> optimal(Maze &maze, Rat &roger, vector<string> &all_routes, ofstr
             std::string k = "";
             if (maze.vector_of_generated_routes.size() == 0) {
                 continue;
-            } // необходимо проверять сгенерированные последовательности на пустоту
+            } 
             
             for (int j = 0; j < maze.vector_of_generated_routes[0].size(); j++) {
                 if (maze.vector_of_generated_routes[0][j] >= 1 && maze.vector_of_generated_routes[0][j] <= 33) {
