@@ -110,8 +110,8 @@ public:
 
 class Operator_Symmetry : public Discrete_Operator {
 public:
-    void apply(Maze &maze, Rat &rate) override; // Написано ниже
-    void set_probability(double probability) override; // Написано ниже
+    void apply(Maze &maze, Rat &rate) override; 
+    void set_probability(double probability) override; 
     string get_name() override {
         return "symmetry";
     }
@@ -119,8 +119,8 @@ public:
 
 class Operator_Compression : public Discrete_Operator {
 public:
-    void apply(Maze &maze, Rat &rate) override; // Написано ниже
-    void set_probability(double probability) override; // Написано ниже
+    void apply(Maze &maze, Rat &rate) override;
+    void set_probability(double probability) override;
     string get_name() override {
         return "compression";
     }
@@ -259,7 +259,7 @@ public:
             }
         }
 
-        // Link: https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
+        
         double random_from_0_to_1 = my_generate_random(0.0, 1.0);
         double cur_sum = 0.0;
         for (auto &pair_direction_double: cur_probabilities_of_abs_dirs) {
@@ -429,7 +429,7 @@ public:
         int_to_coordinate[13] = {-2, 1};
         int_to_coordinate[37] = {-2, 2};
         int_to_coordinate[2] = {-2, 3};
-        int_to_coordinate[40] = {-2, -2}; // это d??
+        int_to_coordinate[40] = {-2, -2}; 
         int_to_coordinate[1] = {-2, -3};
         int_to_coordinate[12] = {-2, -1};
 
@@ -463,7 +463,7 @@ public:
         int_to_coordinate[43] = {4, -2};
 
 
-        // Каждой точке сопоставил координату
+        // Каждой точке сопоставили координату
 
 
         n = int_to_char.size();
@@ -584,7 +584,7 @@ public:
 
     string choose_an_operator() {
         {
-            // Проверка того, что данные корректные
+            // Проверка на корректность
             double sum_of_probs = 0;
             for (auto &pair_string_double: operators_to_probabilities) {
                 double el = pair_string_double.second;
@@ -632,7 +632,6 @@ public:
         bool g = false;
         while (!roger.completed_route() && i <= 1000) {
             string chosen_operator = choose_an_operator();
-            // Здесь можно выводить информацию от том, какой дискретный оператор в данный момент работает.
             // chosen_operator - это имя дискретного оператора, применяемого в данный момент.
             cout << chosen_operator;
 
@@ -704,17 +703,14 @@ public:
         map_from_name_to_operator[operator_inversion.get_name()] = &operator_inversion;
         map_from_name_to_operator[operator_symmetry.get_name()] = &operator_symmetry;
         map_from_name_to_operator[operator_compression.get_name()] = &operator_compression;
-        //map_from_name_to_operator[operator_ring.get_name()] = &operator_ring;
+
     }
 #endif
 
     void conduct_series_of_experiments_memorizing_routes(size_t number_of_experiments, Rat& roger) {
         vector_of_generated_routes.clear();
         flag_has_to_stop = false;
-        // СЕЙЧАС РАБОТАЕТ ТОЛЬКО ОПЕРАТОР РАНДОМА И ОПЕРАТОР ИНВЕРСИИ
-        // Написаны операторы: general, random, inversion
-        // general discrete operator - вспомогательная вещь, в явном виде грызун не применяет дискретный оператор.
-        // Оператор общего вида нужен чисто для упрощения программирования
+
 
         long long counter_of_wrong_routes = 0;
         for (size_t i = 0; i < number_of_experiments; ++i) {
@@ -753,13 +749,11 @@ public:
             exit(1);
         }
 #ifdef you_can_edit_this
-        // general, random, inversion
         operators_to_probabilities[discrete_operator.get_name()] = vec[0];
         operators_to_probabilities[operator_random.get_name()] = vec[1];
         operators_to_probabilities[operator_inversion.get_name()] = vec[2];
         operators_to_probabilities[operator_symmetry.get_name()] = vec[3];
         operators_to_probabilities[operator_compression.get_name()] = vec[4];
-        //operators_to_probabilities[operator_ring.get_name()] = vec[5];
 #endif
     }
 
@@ -795,7 +789,7 @@ public:
                 sum_of_probabilities_impossible += rat_ptr->probabilities_of_relative_dirs[choice];
                 rat_ptr->cur_probabilities_of_abs_dirs[new_direction] = 0;
             }
-        } // насчитали суммарную вероятность направлений, в которых двигаться невозможно
+        } 
 
         if (abs(1 - sum_of_probabilities_impossible) < eps) {
             cerr
@@ -833,10 +827,8 @@ public:
             string rats_name, session_str, trial_str, route;
             ss >> rats_name >> session_str >> trial_str >> route;
 
-            vector<vector<string>> &vv = rats_name_to_experiment_results[rats_name]; // vv = vector of vectors
-            //cout << session_str << '\n';
+            vector<vector<string>> &vv = rats_name_to_experiment_results[rats_name]; 
             int session = stoi(session_str);
-            //cout << trial_str << '\n';
             int trial = stoi(trial_str);
             if (vv.size() == session) {
                 vv.emplace_back();
